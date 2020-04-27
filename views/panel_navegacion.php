@@ -1,10 +1,10 @@
 <nav>
     <ul>
         <li>
-            <a href="/planilla_turnos"><h1>Planilla de Turnos</h1></a>            
+            <a href="/planilla_turnos">Planilla de Turnos</a>
         </li>
         <li>
-        <a href="/"><h1>Nuevo Turno</h1></a>
+        <a href="/">Nuevo Turno</a>
         </li>
     </ul>
 </nav>
