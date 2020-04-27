@@ -30,6 +30,9 @@ Ademas se puede verificar relacion entre campos, como puede ser la edad y la fec
 <p>Nota: La hora del Turno no esta tildada como obligatoria, sin embargo para la implementacion del codigo<br>
 que arme, la considere como obligatoria. las razones son que del lado del servidor, debo evitar que <br>
 se reserve un turno en la misma fecha y hora, y la carga de la hora debe estar siempre, a mi consideracion.</p>
+**Correcciones**: En general, lo que vos planteas ("Pero lo que solo se puede verificar del lado del servidor es la consistencia de los mismos") también es posible verificarlo del lado del cliente. No es un problema de que se puede procesar y que no, sino mas bien de quien tiene el control. Nunca se puede asumir que el cliente ejecutara todo nuestro código, porque siempre puede o bien desactivarse, o bien algún usuario malicioso revisar la forma de la petición en intentar realizar un ataque, y de forma intencional saltearse todos y cada uno de los controles que imlpementemos. En general, el escenario ideal es que se realizan controles de lado cliente y servidor y sean prácticamente los mismos. Del lado del cliente, para asistir al usuario al momento de la carga, dándole feedback antes de que se envíe el formulario. Es una cuestión de usabilidad. Del lado del servidor, los controles sirven para aplicar las reglas de negocio, pero serán útiles justamente cuando un usuario que no siga los pasos adecuados, no viole reglas del negocio. Ojo, no solo se da en caso de usuarios malintencionados, puede ocurrir también que usuarios se conecten con navegadores viejos que no soporte alguna característica particular.
+
+**Correcciones 2**: La restricción de unicidad de fecha y hora no estaba en el enunciado, era innecesario implementarla. Igual dejala.
 
 2) Extienda el ejercicio anterior para que al enviar el formulario mediante el método POST se muestre
 al usuario un resumen del turno. <br><br>
@@ -70,6 +73,7 @@ funcion HASH, usando el modulo "md5" de php; de esta forma evitando que dos paci
 en la misma fecha y hora, que eso ya forma parte de las primeras  restricciones en carga de datos, 
 se independiza el nombre con que cargue la imagen de la receta, ya que sera cambiada por una manejada 
 por el sistema. <br></p>
+**Correcciones**: Bueno, ya lo charlamos esto, pero lo dejo asentado acá brevemente. Todo lo que planteas agrega reglas de negocio que son innecesarias o complejizan la solución. El enfoque mas sencillo para mi es utilizar algún mecanismo del lenguaje para generar un identificador con baja probabilidad de repetición (caso de la función `uniqid()`) y luego un simple chequeo de colisión de nombre de archivo (`file_exists()`). En caso de colisión, se genera un nuevo identificador. Estos id tienen algunas ventajas, entre ellas, que no dependen de los campos del formulario, los cuales pueden variar según se modifiquen los requisitos de la organización para la cual están programados.
 
 5) Utilice las herramientas para desarrollador del navegador y observe cómo fueron codificados por
 el navegador los datos enviados por el navegador en los dos ejercicios anteriores. ¿Qué diferencia
