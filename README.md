@@ -73,6 +73,7 @@ funcion HASH, usando el modulo "md5" de php; de esta forma evitando que dos paci
 en la misma fecha y hora, que eso ya forma parte de las primeras  restricciones en carga de datos, 
 se independiza el nombre con que cargue la imagen de la receta, ya que sera cambiada por una manejada 
 por el sistema. <br></p>
+**Correcciones**: Bueno, ya lo charlamos esto, pero lo dejo asentado acá brevemente. Todo lo que planteas agrega reglas de negocio que son innecesarias o complejizan la solución. El enfoque mas sencillo para mi es utilizar algún mecanismo del lenguaje para generar un identificador con baja probabilidad de repetición (caso de la función `uniqid()`) y luego un simple chequeo de colisión de nombre de archivo (`file_exists()`). En caso de colisión, se genera un nuevo identificador. Estos id tienen algunas ventajas, entre ellas, que no dependen de los campos del formulario, los cuales pueden variar según se modifiquen los requisitos de la organización para la cual están programados.
 
 5) Utilice las herramientas para desarrollador del navegador y observe cómo fueron codificados por
 el navegador los datos enviados por el navegador en los dos ejercicios anteriores. ¿Qué diferencia
